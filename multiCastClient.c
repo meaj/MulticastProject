@@ -51,15 +51,18 @@ int main(int argc, char * argv[]){
                 printf("Group join failed with error %d/n", errno);
                 return -1;
     }
-    printf("Group join succeded, waiting for broadcast/n");
+        printf("Group join succeded, waiting for broadcast/n");
 
         // infinite loop to listen
         while (1){
                 // If a message is received on the socket, print message and the current time
                 if ((size = recvfrom(sock,&buffer,sizeof(buffer),0,(struct sockaddr*)&server, &addrlen)) > 0){
-                        l_time = localtime(&r_time);
-                        printf("[%d-%d-%d %d:%d:%d] %s\n", l_time->tm_mday, l_time->tm_mon+1, l_time->tm_year+1900, l_time->tm_hour, l_time->tm_min, l_time->tm_sec, buffer);
+  //                      l_time = localtime(&r_time);
+                struct tm* l_time;
+                time(&r_time);
+                l_time = localtime(&r_time);
+
+                    printf("[%d-%d-%d %d:%d:%d] %s\n", l_time->tm_mday, l_time->tm_mon+1, l_time->tm_year+1900, l_time->tm_hour, l_time->tm_min, l_time->tm_sec, buffer);
                 }
-        }
-        close(sock);
+        }        close(sock);
 }
