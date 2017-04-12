@@ -51,6 +51,7 @@ int main(int argc, char * argv[]){
 		printf("Group join failed with error %d/n", errno);
 		return -1;
     }
+    printf("Group join succeded, waiting for broadcast/n");
 	
 	// infinite loop to listen
 	while (1){
