@@ -20,7 +20,8 @@ int main(int argc, char *argv[])
 	}
 
 	//Take the port in from the command line
-	memset(port, 222, sizeof(char) * 3); 
+	memset(port, '\0', sizeof(port));
+	memset(port, '2', sizeof(char) * 3);
 	strcat(port, argv[1]);
 	//Creat socket
 	sock = socket(AF_INET, SOCK_DGRAM, 0);
@@ -56,8 +57,9 @@ int main(int argc, char *argv[])
 	{
 		//Recieve a message, setting the bytes recieve to size, and 
 		//storing the message at buffer
-		size = send(sock,(char*) n, sizeof(int), flags);
-		printf("Message sent: \"%d\"\n\n", (int) ((char *) n));
+		sprintf(buffer, "This is message %d from Group %s beacon\n", n, argv[1]);
+		size = send(sock, buffer, sizeof(int), flags);
+		printf("Message sent: \"%s\"\n\n", buffer);
 		n++;
 		sleep(1);
 	}
