@@ -143,7 +143,7 @@ int main(int argc, char *argv[]){
 	memset(port, '\0', sizeof(port));
 	memset(port, '2', sizeof(char) * 3);
 	strcat(port, argv[1]);
-	//Creat socket
+	//Create socket
 	sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if(sock < 0){
 		printf("Socket result: %d", sock);
